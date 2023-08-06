@@ -22,7 +22,7 @@ export default function Profile()
     function CreateActivityGraph() {
         if (!results?.games.length) return null;
         
-        const dates = {};
+        const dates = {}; 
         const startDate = new Date(results.games[0].timestamp);
         const endDate = new Date();
         
