@@ -17,7 +17,7 @@ export default function Game()
 
     function pollConversation() {
         console.log("human")
-        fetch(`/game/info/${id}`)
+        fetch(`/api/game/info/${id}`)
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(({game}) => {
                 let { interaction: conversation, finished, correctQuestions } = game;
@@ -37,7 +37,7 @@ export default function Game()
         setMessages(messages => [...messages, "BUFFER"]);
         const index = messages.length + 1;
 
-        fetch(`/game/answer/${id}`, {
+        fetch(`/api/game/answer/${id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ answer: message })
@@ -60,7 +60,7 @@ export default function Game()
     useEffect(() => {
         let shouldPoll = true;
 
-        fetch(`/game/info/${id}`)
+        fetch(`/api/game/info/${id}`)
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(data => {
                 setGame(data.game);
