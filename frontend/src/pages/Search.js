@@ -8,7 +8,7 @@ export default function Search()
     const [results, setResults] = useState(null);
 
     useEffect(() => {
-        fetch(`/api/account/search/${query}`)
+        fetch(`/account/search/${query}`)
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(data => setResults(data));
     }, [query]);

@@ -32,7 +32,7 @@ export default function GameCreate()
 
         const difficulty = clicked === "g" ? 0 : (clicked === "m" ? 1 : 2);
 
-        fetch("/api/game/create", {
+        fetch("/game/create", {
             method: "POST",
             credentials: "include",
             headers: {
