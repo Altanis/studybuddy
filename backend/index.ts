@@ -1,6 +1,7 @@
 import express from "express";
 import { auth } from "firebase-admin";
 import CookieParser from "cookie-parser";
+import cors from "cors";
 
 import { db } from "./firebase/db";
 import { User } from "./types/models";
@@ -9,8 +10,9 @@ import AccountRouter from "./routes/account";
 import GameRouter from "./routes/games";
 
 const PORT = 3001;
-
 const app = express();
+
+app.use(cors({ origin: true, credentials: true }))
 app.use(express.json());
 app.use(CookieParser());
 
