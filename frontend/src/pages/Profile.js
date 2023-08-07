@@ -14,7 +14,7 @@ export default function Profile()
     const [results, setResults] = useState(null);
 
     useEffect(() => {
-        fetch(`http://45.77.99.60:3001/account/profile/${id}`)
+        fetch(`http://45.77.99.60:3001/account/profile/${id}`, { credentials: "include" })
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(data => setResults(data));
     }, [id]);

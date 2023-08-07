@@ -17,7 +17,7 @@ export default function Game()
 
     function pollConversation() {
         console.log("human")
-        fetch(`http://45.77.99.60:3001/game/info/${id}`)
+        fetch(`http://45.77.99.60:3001/game/info/${id}`, { credentials: "include" })
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(({game}) => {
                 let { interaction: conversation, finished, correctQuestions } = game;
@@ -39,6 +39,7 @@ export default function Game()
 
         fetch(`http://45.77.99.60:3001/game/answer/${id}`, {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ answer: message })
         })
@@ -60,7 +61,7 @@ export default function Game()
     useEffect(() => {
         let shouldPoll = true;
 
-        fetch(`http://45.77.99.60:3001/game/info/${id}`)
+        fetch(`http://45.77.99.60:3001/game/info/${id}`, { credentials: "include" })
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(data => {
                 setGame(data.game);
