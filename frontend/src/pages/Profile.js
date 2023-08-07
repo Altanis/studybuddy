@@ -14,7 +14,7 @@ export default function Profile()
     const [results, setResults] = useState(null);
 
     useEffect(() => {
-        fetch(`/account/profile/${id}`)
+        fetch(`/api//account/profile/${id}`)
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(data => setResults(data));
     }, [id]);

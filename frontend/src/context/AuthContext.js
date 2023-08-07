@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
         const token = await getAuth().currentUser.getIdToken(true);
         setCookie("token", token, 60 * 55);
 
-        const response = await fetch("/account/login", {
+        const response = await fetch("/api//account/login", {
             method: "GET",
             credentials: "include"
         });

@@ -8,7 +8,7 @@
     "start:backend": "npm run build:backend && node api/index.js",
     "build:frontend": "cd frontend && npm run build",
     "start:frontend": "cd frontend && npm run start",
-    "start": "fproc run \"npm run start:frontend\" && fproc run \"npm run start:backend\""
+    "start": "pm2 start \"npm run start:frontend\" --name \"frontend\" && pm2 start \"npm run start:backend\" --name \"backend\""
   },
   "author": "Altanis",
   "license": "ISC",
