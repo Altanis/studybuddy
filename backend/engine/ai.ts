@@ -71,7 +71,8 @@ class AIEngine
                     
                     const { rating, response, question } = this.parseResponse(message, !game.answeredQuestions);
 
-                    if (rating > 5) game.correctQuestions++;
+                    if (rating >= 0) game.rating += rating;
+                    if (rating >= 5) game.correctQuestions++;
                     game.finished = ++game.answeredQuestions >= game.totalQuestions;
                     game.interaction.push({ role: "assistant", content: message, parsed: { rating, response, question: game.finished ? "" : question } });
 

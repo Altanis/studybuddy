@@ -1,7 +1,7 @@
 {
   "name": "studybuddy",
   "version": "1.0.0",
-  "description": "A Quizizz/Quizlet merge clone designed at a 12 hour hackathon.",
+  "description": "An AI based quiz game designed at a 4 day long hackathon..",
   "main": "api/index.js",
   "scripts": {
     "build:backend": "tsc -p tsconfig.json",

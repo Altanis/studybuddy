@@ -42,8 +42,10 @@ export interface Game
     difficulty: Difficulties;
     /** The number of questions in total to be asked by the AI. */
     totalQuestions: number;
-    /** The number of questions the user got correct. */
+    /** The number of questions the user has answered correctly. */
     correctQuestions: number;
+    /** The total rating the user has gotten. */
+    rating: number;
     /** The number of questions answered. */
     answeredQuestions: number;
     /** Whether or not the game is finished. */

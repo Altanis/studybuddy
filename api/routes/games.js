@@ -28,6 +28,7 @@ GameRouter.route("/create")
         topic,
         difficulty,
         totalQuestions,
+        rating: 0,
         correctQuestions: 0,
         answeredQuestions: -1,
         finished: false,
@@ -57,6 +58,7 @@ GameRouter.route("/info/:id")
             difficulty: game.difficulty,
             totalQuestions: game.totalQuestions,
             answeredQuestions: game.answeredQuestions,
+            rating: game.rating,
             correctQuestions: game.correctQuestions,
             finished: game.finished,
             timestamp: game.timestamp,
@@ -84,6 +86,8 @@ GameRouter.route("/answer/:id")
         return res.status(400).json({ message: "It is not your turn to answer." });
     if (req.user?.id !== game.user.id)
         return res.status(400).json({ message: "You are not the owner of this game." });
+    if (answer.length > (200 * (game.difficulty + 1)))
+        return res.status(400).json({ message: "The length of your answer is too long." });
     game.interaction.push({ role: "user", content: answer });
     ai_1.ai.generateResponse(game)
         .then(reply => {
@@ -94,7 +98,8 @@ GameRouter.route("/answer/:id")
             response,
             question,
             finished: game.finished,
-            correctQuestions: game.correctQuestions,
+            totalRating: game.rating,
+            correctQuestions: game.correctQuestions
         });
     })
         .catch(err => {

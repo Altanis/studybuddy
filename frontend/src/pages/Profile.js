@@ -8,6 +8,8 @@ import { Line, Pie } from 'react-chartjs-2';
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
+const DUMMY_DATA = false;
+
 export default function Profile()
 {
     const { id } = useParams();
@@ -16,7 +18,39 @@ export default function Profile()
     useEffect(() => {
         fetch(`http://45.77.99.60:3001/account/profile/${id}`, { credentials: "include" })
             .then(res => [200, 304].includes(res.status) && res.json())
-            .then(data => setResults(data));
+            .then(data => {
+                if (DUMMY_DATA)
+                {
+                    data.games = [];
+                    for (let i = 0; i < 10; ++i)
+                    {
+                        const totalQuestions = Math.floor(Math.random() * 10) + 1;
+                        const answeredQuestions = Math.random() > 0.5 ? totalQuestions : Math.floor(Math.random() * totalQuestions);
+                        const difficulty = Math.floor(Math.random() * 3);
+                        const correctQuestions = Math.floor(Math.random() * totalQuestions);
+                        let rating = 0;
+                        for (let i = 0; i < correctQuestions; i++)
+                        {
+                            rating += Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+                        }
+    
+                        data.games.push({
+                            totalQuestions,
+                            answeredQuestions,
+                            correctQuestions,
+                            difficulty,
+                            finished: answeredQuestions === totalQuestions,
+                            rating,
+                            timestamp: Date.now() - (Math.random() * 6.048E8),
+                            id: "wow!",
+                            user: {},
+                            topic: `DUMMY TOPIC ${i}`
+                        });
+                    };
+                }
+
+                setResults(data);
+            });
     }, [id]);
 
     function CreateActivityGraph() {
@@ -32,24 +66,28 @@ export default function Profile()
             currentDate.setDate(currentDate.getDate() + 1);
         };
 
-        results.games.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        results.games.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
         
         for (const game of results.games) {
             const date = new Date(game.timestamp).toLocaleDateString();
             if (dates[date]) dates[date]++;
             else dates[date] = 1;
         }
+
+        const forSortedData = Object.entries(dates)
+            .sort(([dateA], [dateB]) => new Date(dateA) - new Date(dateB))
+            .map(([date, activity]) => activity);
         
         const data = {
-            labels: Object.keys(dates),
+            labels: Object.keys(dates).sort((dateA, dateB) => new Date(dateA) - new Date(dateB)),
             datasets: [
                 {
                     label: 'Activity',
-                    data: Object.entries(dates).map(([date, activity]) => activity),
+                    data: forSortedData,
                     backgroundColor: '#ba63ff',
                     borderColor: '#ba63ff',
                     tension: 0.1,
-                    pointRadius: Object.entries(dates).map(([d, activity]) => activity === 0 ? 0 : 5),
+                    pointRadius: forSortedData.map((activity) => (activity === 0 ? 0 : 5)),
                     pointHoverRadius: 8,
                 },
             ],
@@ -130,8 +168,8 @@ export default function Profile()
                                         <div className="flex flex-col items-center">
                                             <p className="text-white text-center">
                                                 Score:{" "}
-                                                <span className={game.correctQuestions * 2 > game.totalQuestions ? "text-green-400" : "text-red-400"}>
-                                                    { `${((game.correctQuestions / game.totalQuestions) * 100).toFixed(0)}%` }
+                                                <span className={game.rating > (game.totalQuestions * 5) ? "text-green-400" : "text-red-400"}>
+                                                    { `${((game.rating / (game.totalQuestions * 10)) * 100).toFixed(0)}%` }
                                                 </span>
                                             </p>
                                         </div>

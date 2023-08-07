@@ -66,7 +66,9 @@ class AIEngine {
                 if (!message)
                     return rej("An error occurred while generating a response. Please try again later.");
                 const { rating, response, question } = this.parseResponse(message, !game.answeredQuestions);
-                if (rating > 5)
+                if (rating >= 0)
+                    game.rating += rating;
+                if (rating >= 5)
                     game.correctQuestions++;
                 game.finished = ++game.answeredQuestions >= game.totalQuestions;
                 game.interaction.push({ role: "assistant", content: message, parsed: { rating, response, question: game.finished ? "" : question } });

@@ -49,8 +49,8 @@ export default function Search()
                                         <div className="flex flex-col items-center">
                                             <p className="text-white text-center">
                                                 Score:{" "}
-                                                <span className={game.correctQuestions * 2 > game.totalQuestions ? "text-green-400" : "text-red-400"}>
-                                                    { `${((game.correctQuestions / game.totalQuestions) * 100).toFixed(0)}%` }
+                                                <span className={game.rating > (game.totalQuestions * 5) ? "text-green-400" : "text-red-400"}>
+                                                    { `${((game.rating / (game.totalQuestions * 10)) * 100).toFixed(0)}%` }
                                                 </span>
                                             </p>
                                         </div>
