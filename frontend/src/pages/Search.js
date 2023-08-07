@@ -8,7 +8,7 @@ export default function Search()
     const [results, setResults] = useState(null);
 
     useEffect(() => {
-        fetch(`/api//account/search/${query}`)
+        fetch(`http://45.77.99.60:3001/account/search/${query}`)
             .then(res => [200, 304].includes(res.status) && res.json())
             .then(data => setResults(data));
     }, [query]);
