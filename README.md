@@ -10,4 +10,4 @@ When using StudyBuddy, you'll have a profile that tracks the games you've played
 
 The app's engaging format makes studying more enjoyable, fostering effective learning. By combining AI technology with educational games, StudyBuddy revolutionizes the way people study and enhances the learning process.
 
-<video src="https://www.youtube.com/watch?v=IVpkS-Rn2KA&ab_channel=Altanis" width=180></video> 
+https://github.com/Altanis/studybuddy/assets/38045884/a78bf6d6-5639-47e7-ab16-969236e964b3
