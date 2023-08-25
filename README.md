@@ -1,6 +1,6 @@
 ﻿# StudyBuddy
 
-StudyBuddy is an application designed at a 4 day long hackathon, [DualHacks](https://dualhacks.devpost.com/), for innovating technology.
+StudyBuddy is an application designed at a 4 day long hackathon, [DualHacks](https://dualhacks.devpost.com/), for innovating technology. This app won 4th of ~30ish competitors.
 
 ## What is StudyBuddy?
 
@@ -10,4 +10,4 @@ When using StudyBuddy, you'll have a profile that tracks the games you've played
 
 The app's engaging format makes studying more enjoyable, fostering effective learning. By combining AI technology with educational games, StudyBuddy revolutionizes the way people study and enhances the learning process.
 
-**An in-depth video will be attached here later today.**
+<video src="https://www.youtube.com/watch?v=IVpkS-Rn2KA&ab_channel=Altanis" width=180 />
